@@ -4,7 +4,7 @@ const express = require('express');
 const router = require('./app/router');
 const morgan = require('morgan');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5050;
 const app = express();
 
 

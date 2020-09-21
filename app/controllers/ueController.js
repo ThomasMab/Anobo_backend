@@ -1,22 +1,23 @@
-const { relation, ue } = require('../models');
-const UE = require('../models/ue');
+const { Relation, UE } = require('../models');
 
 const ueController = {
+
     getAllUe: async (req, res) => {
         try {
-          const lists = await UE.findAll({
+          const ue = await UE.findAll({
             include: {
               association: 'relation',
             },
             order: [
-              ['id_ue', 'ASC'],
+              ['id', 'ASC'],
+              ['ue', 'id', 'ASC']
             ]
           });
-          res.json(lists);
+          res.json(ue);
         }
         catch (error) {
           console.trace(error);
-          res.status(500).json(error.toString());
+          res.status(500).json('echec');
         }
       },
     
@@ -24,14 +25,14 @@ const ueController = {
   getOneUe: async (req, res) => {
     try {
       const ueId = req.params.id;
-      const ue = await Card.findByPk(ueId, {
+      const ue = await UE.findByPk(ueId, {
         include: 'relation',
         order: [
-          ['id_ue', 'ASC']
+          ['id', 'ASC']
         ]
       });
       if (!ue) {
-        res.status(404).json('Ne trouve pas l id ');
+        res.status(404).json('Ne trouve pas id ');
       } else {
         res.json(ue);
       }
@@ -42,17 +43,17 @@ const ueController = {
 
   createUe: async (req, res) => {
     try {
-      const { id_ue, classe, type } = req.body;
+      const {classe, type } = req.body;
 
       let bodyErrors = [];
-      if (!id_ue, !type, !classe) {
-        bodyErrors.push(`Ne peut être vide`);
+      if (!id, !type, !classe) {
+        bodyErrors.push(`Ne peut pas être vide`);
       }
 
       if (bodyErrors.length) {
         res.status(400).json(bodyErrors);
       } else {
-        let newUe = UE.build({ id_ue, classe, type });
+        let newUe = UE.build({ id, classe, type });
         await newUe.save();
         res.json(newUe);
       }
@@ -63,10 +64,10 @@ const ueController = {
     }
   },
 
-  modifyCard: async (req, res) => {
+  modifyUe: async (req, res) => {
     try {
       const UeId = req.params.id;
-      const { id_ue, classe, type } = req.body;
+      const { id, classe, type } = req.body;
 
       let ueId = await ue.findByPk(UeId, {
         include: ['relation']
@@ -112,7 +113,7 @@ const ueController = {
       const UeId = req.params.id;
       let ue = await ue.findByPk(UeId);
       if (!ue) {
-        res.status(404).json(`=Ne trouves pas UE avec ${cardId}`);
+        res.status(404).json(`Ne trouves pas UE avec' ${cardId}`);
       } else {
         await card.destroy();
         res.json('ok');
@@ -126,4 +127,4 @@ const ueController = {
 };
 
 
-module.exports = UeController;
+module.exports = ueController;

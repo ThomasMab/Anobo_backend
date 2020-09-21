@@ -11,20 +11,20 @@ router.get('/', (req, res) => {
 });
 
 // UEs
-router.get('/UE', ueController.getAllUe);
-router.get('/UE/:id_ue', ueController.getOneUe);
-router.post('/UE', ueController.createUe);
-router.patch('/UE/:id_ue', ueController.modifyUe);
-router.put('/UE/:id_ue?', ueController.createOrModify);
-router.delete('/UE/:id_ue', ueController.deleteUe);
+router.get('/ue', ueController.getAllUe);
+router.get('/ue/:id', ueController.getOneUe);
+router.post('/ue', ueController.createUe);
+router.patch('/ue/:id', ueController.modifyUe);
+router.put('/ue/:id?', ueController.createOrModify);
+router.delete('/ue/:id', ueController.deleteUe);
 
 // Relations
 router.get('/relation', relationController.getAllRelation);
 router.post('/relation', relationController.createRelation);
-router.patch('/relation/:id_e', relationController.modifyRelation);
+router.patch('/relation/:id_ue', relationController.modifyRelation);
 router.put('/relation/:id_ue?', relationController.createOrModify);
 router.delete('/relation/:id_ue', relationController.deleteRelation);
-
+// router.post('/UE/:id/relation', relationController.associateRelationToUe);
 
 router.use((req, res) => {
   res.status(404).send('Existe pas');

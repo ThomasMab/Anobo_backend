@@ -80,12 +80,12 @@ const relationController = {
     }
   },
 
-  deleteTag: async (req, res) => {
+  deleteRelation: async (req, res) => {
     try {
       const relationId = req.params.id;
       let relation = await Relation.findByPk(tagId);
       if (!relation) {
-        res.status(404).json('Can not find tag with id ' + relationId);
+        res.status(404).json('Ne trouve pas ID' + relationId);
       } else {
         await relation.destroy();
         res.json('OK');
@@ -93,6 +93,39 @@ const relationController = {
     } catch (error) {
       console.trace(error);
       res.status(500).json(error);
+    }
+  },
+
+  associateRelationToUe: async (req, res) => {
+    try {
+      console.log(req.body);
+      const ueId = req.params.id;
+      const relationId = req.body.tagId;
+
+      let ue = await UE.findByPk(ueId, {
+        include: ['relation']
+      });
+      if (!ue) {
+        return res.status(404).json('Ne trouve pas UE id ' + cardId);
+      }
+
+      let relation = await Relation.findByPk(relationId);
+      if (!relation) {
+        return res.status(404).json('Ne trouve pas relation id ' + tagId);
+      }
+
+      await ue.addRelation(relation);
+
+      // les associations de l'instance ne sont pas mises à jour
+      // on doit donc refaire un select
+      ue = await UE.findByPk(cardId, {
+        include: ['relation']
+      });
+      res.json(ue);
+
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
     }
   },
 };
