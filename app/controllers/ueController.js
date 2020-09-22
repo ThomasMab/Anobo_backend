@@ -4,18 +4,9 @@ const ueController = {
 
     getAllUe: async (req, res) => {
         try {
-          const ue = await UE.findAll({
-            include: {
-              association: 'relation',
-            },
-            order: [
-              ['id', 'ASC'],
-              ['ue', 'id', 'ASC']
-            ]
-          });
+          const ue = await UE.findAll();
           res.json(ue);
-        }
-        catch (error) {
+        } catch (error) {
           console.trace(error);
           res.status(500).json('echec');
         }
@@ -26,10 +17,7 @@ const ueController = {
     try {
       const ueId = req.params.id;
       const ue = await UE.findByPk(ueId, {
-        include: 'relation',
-        order: [
-          ['id', 'ASC']
-        ]
+        include: 'relation'
       });
       if (!ue) {
         res.status(404).json('Ne trouve pas id ');

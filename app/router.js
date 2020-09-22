@@ -20,11 +20,12 @@ router.delete('/ue/:id', ueController.deleteUe);
 
 // Relations
 router.get('/relation', relationController.getAllRelation);
+router.get('/relation/:id', relationController.getOneRelation);
 router.post('/relation', relationController.createRelation);
-router.patch('/relation/:id_ue', relationController.modifyRelation);
-router.put('/relation/:id_ue?', relationController.createOrModify);
-router.delete('/relation/:id_ue', relationController.deleteRelation);
-// router.post('/UE/:id/relation', relationController.associateRelationToUe);
+router.patch('/relation/:id', relationController.modifyRelation);
+router.put('/relation/:id?', relationController.createOrModify);
+router.delete('/relation/:id', relationController.deleteRelation);
+router.post('/UE/:id/relation', relationController.associateRelationToUe);
 
 router.use((req, res) => {
   res.status(404).send('Existe pas');

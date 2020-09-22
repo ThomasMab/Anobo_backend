@@ -13,9 +13,23 @@ const relationController = {
     }
   },
 
+  getOneRelation: async (req, res) => {
+    try {
+      const relationId = req.params.id;
+      const relation = await Relation.findByPk(relationId);
+      if (!relation) {
+        res.status(404).json('Ne trouve pas id ');
+      } else {
+        res.json(relation);
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   createRelation: async (req, res) => {
     try {
-      const { id_relation, nature, ue_cible } = req.body;
+      const {nature, ue_cible } = req.body;
       let bodyErrors = [];
       if (!nature) {
         bodyErrors.push('nature à remplir');
