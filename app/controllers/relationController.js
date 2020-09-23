@@ -1,6 +1,4 @@
-const { relation, ue } = require('../models');
-const Relation = require('../models/relation');
-const UE = require('../models/ue');
+const { Relation, UE } = require('../models');
 
 const relationController = {
   getAllRelation: async (req, res) => {

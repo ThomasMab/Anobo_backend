@@ -8,7 +8,7 @@ const ueController = {
           res.json(ue);
         } catch (error) {
           console.trace(error);
-          res.status(500).json('echec');
+          res.status(500).json(error);
         }
       },
     

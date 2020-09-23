@@ -1,7 +1,8 @@
 const UE = require('./ue');
 const Relation = require('./relation');
 
-//Associations N N => UE et relation
+//Mise en place de l'associations N N => entre UE et 
+//relation grâce à la table UE_relation
 
 UE.belongsToMany(Relation, {
      as: 'relation',
