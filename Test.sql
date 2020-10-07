@@ -6,7 +6,7 @@ CREATE TABLE UE
 	designation VARCHAR,
 	description VARCHAR,
 	interpretation VARCHAR,
-	secteur VARCHAR,
+	secteur VARCHAR
 );
 
 INSERT INTO "ue" ("id_ue","classe", "type", "designation", "description", "interpretation", "secteur")
