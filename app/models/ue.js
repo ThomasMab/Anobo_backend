@@ -5,19 +5,20 @@ const sequelize = require('../database');
 class UE extends Model {};
 
 UE.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true
-    },  classe: DataTypes.TEXT,
-  type: DataTypes.TEXT,
-  zone: DataTypes.TEXT,
-  secteur: DataTypes.TEXT,
-  description: DataTypes.TEXT,
-  Designation: DataTypes.TEXT,
-  auteur: DataTypes.TEXT
-}, {
-  sequelize,
-  tableName: "ue"
-});
+    id_ue: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },  
+    classe: DataTypes.TEXT,
+    type: DataTypes.TEXT,
+    designation: DataTypes.TEXT,
+    description: DataTypes.TEXT,
+    interpretation: DataTypes.TEXT,
+    secteur: DataTypes.TEXT,
+  }, 
+  {
+    sequelize,
+    tableName: "ue"
+  });
 
 module.exports = UE;

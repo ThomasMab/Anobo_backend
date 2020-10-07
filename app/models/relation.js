@@ -6,10 +6,9 @@ class Relation extends Model {};
 
 Relation.init({
   id: {
-  type: DataTypes.INTEGER,
-  primaryKey: true
+    type: DataTypes.INTEGER,
+    primaryKey: true
   },
-  ue_origine : DataTypes.INTEGER,
   nature: DataTypes.TEXT,
   ue_cible : DataTypes.INTEGER
 }, {

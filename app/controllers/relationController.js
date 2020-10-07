@@ -11,19 +11,6 @@ const relationController = {
     }
   },
 
-  getOneRelation: async (req, res) => {
-    try {
-      const relationId = req.params.id;
-      const relation = await Relation.findByPk(relationId);
-      if (!relation) {
-        res.status(404).json('Ne trouve pas id ');
-      } else {
-        res.json(relation);
-      }
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
 
   createRelation: async (req, res) => {
     try {
@@ -75,71 +62,6 @@ const relationController = {
     }
   },
 
-  createOrModify: async (req, res) => {
-    try {
-      let relation;
-      if (req.params.id) {
-        relation = await Relation.findByPk(req.params.id);
-      }
-      if (relation) {
-        await relationController.modifyRelation(req, res);
-      } else {
-        await relationController.createRelation(req, res);
-      }
-    } catch (error) {
-      console.trace(error);
-      res.status(500).send(error);
-    }
-  },
-
-  deleteRelation: async (req, res) => {
-    try {
-      const relationId = req.params.id;
-      let relation = await Relation.findByPk(tagId);
-      if (!relation) {
-        res.status(404).json('Ne trouve pas ID' + relationId);
-      } else {
-        await relation.destroy();
-        res.json('OK');
-      }
-    } catch (error) {
-      console.trace(error);
-      res.status(500).json(error);
-    }
-  },
-
-  associateRelationToUe: async (req, res) => {
-    try {
-      console.log(req.body);
-      const ueId = req.params.id;
-      const relationId = req.body.tagId;
-
-      let ue = await UE.findByPk(ueId, {
-        include: ['relation']
-      });
-      if (!ue) {
-        return res.status(404).json('Ne trouve pas UE id ' + cardId);
-      }
-
-      let relation = await Relation.findByPk(relationId);
-      if (!relation) {
-        return res.status(404).json('Ne trouve pas relation id ' + tagId);
-      }
-
-      await ue.addRelation(relation);
-
-      // les associations de l'instance ne sont pas mises à jour
-      // on doit donc refaire un select
-      ue = await UE.findByPk(cardId, {
-        include: ['relation']
-      });
-      res.json(ue);
-
-    } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
-    }
-  },
 };
 
 module.exports = relationController;
