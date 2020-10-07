@@ -1,6 +1,6 @@
 # Anobo_backend
 
-Créer une BD sur postgresql, puis créer une table avec le fichier "Test.sql" en copiant le create table puis le insert into pour la peupler un peu 
+Créer une BD sur postgresql, puis créer et peupler une table avec le fichier "Test.sql" présent la racine du dossier.
 
 Installer Node.js si besoin
 
@@ -14,7 +14,7 @@ PG_URL=postgresql://thomasmabire:xxxx@localhost:5432/Anobo
 Ouvrir terminal dossier racine et taper :
 npm install --save
 
-Lancer serveur :
+Lancer le serveur :
 node index.js
 
 
