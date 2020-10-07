@@ -11,7 +11,7 @@ PG_URL=postgresql://nom_utilisateur_postgresql:mot_de_passe_utilisateur@localhos
 par exemple pour moi :
 PG_URL=postgresql://thomasmabire:xxxx@localhost:5432/Anobo
 
-Ouvrir terminal dossier racine et taper :
+Ouvrir un terminal dans le dossier racine et taper :
 npm install --save
 
 Lancer le serveur :
